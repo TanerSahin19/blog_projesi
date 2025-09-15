@@ -1,0 +1,59 @@
+{% extends 'blog/base.html' %}
+{% load static %}
+
+{% block title %}Ana Sayfa{% endblock %}
+
+{% block content %}
+<!-- Carousel -->
+{% if carousels %}
+<div id="carouselHome" class="carousel slide carousel-dark">
+  <div class="carousel-indicators">
+    {% for c in carousels %}
+      <button type="button" data-bs-target="#carouselHome" data-bs-slide-to="{{ forloop.counter0 }}"
+              class="{% if forloop.first %}active{% endif %}"></button>
+    {% endfor %}
+  </div>
+  <div class="carousel-inner">
+    {% for c in carousels %}
+      <div class="carousel-item {% if forloop.first %}active{% endif %}">
+        <img src="{{ c.images.url }}" class="d-block w-100" alt="{{ c.title }}">
+        <div class="carousel-caption d-none d-md-block bg-dark text-danger p-3">
+          <h5>{{ c.title }}</h5>
+          <p>{{ c.description }}</p>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselHome" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon"></span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselHome" data-bs-slide="next">
+    <span class="carousel-control-next-icon"></span>
+  </button>
+</div>
+{% endif %}
+
+<!-- Latest Posts -->
+<div class="container mt-5">
+  <h2 class="text-center fw-bold mb-4"> LATEST POSTS</h2>
+  <div class="row ">
+    <div class="col-md-8">
+      {% for post in posts %}
+        <div class="card mb-3">
+          {% if post.image %}
+            <img src="{{ post.image.url }}" class="card-img-top">
+          {% endif %}
+          <div class="card-body">
+            <h5 class="card-title">{{ post.title }}</h5>
+            <p class="card-text">{{ post.content|truncatewords:40 }}</p>
+            <p class="card-text"><small class="text-muted">{{ post.created_at|date:"d M Y" }}</small></p>
+            <a href="{% url 'blog:post_detail' slug=post.slug %}" class="btn btn-primary">Read More</a>
+          </div>
+        </div>
+      {% empty %}
+        <p>Henüz hiç gönderi yok.</p>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+{% endblock %}
