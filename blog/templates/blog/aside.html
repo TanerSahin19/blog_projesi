@@ -1,0 +1,24 @@
+{% load custom_tags %}
+<div class="col-lg-4">
+    <div class="blog-aside">
+        <div class="widget widget-category">
+            <h5 class="widget-title"><span>Categories</span></h5>
+            <ul class="list-unstyled">
+                {% if categories %}
+                    {% for category in categories %}
+                        <li>
+                            <a href="{% url 'blog:category_posts' category.slug %}" 
+                               class="d-flex justify-content-between align-items-start">
+                                <span>{{ category.name }}</span>
+                                <span class="badge bg-danger rounded-pill">{{ category.posts.count }}</span>
+                            </a>
+                        </li>
+                    {% endfor %}
+                {% else %}
+                    <li class="text-muted">Kategori bulunamadı.</li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</div>
+

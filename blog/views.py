@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from .models import Post, Carousel, Category
 
-# Ana sayfa
+# --- Ana Sayfa ---
 def home(request):
     posts = Post.objects.filter(active=True).order_by('-created_at')[:3]  # Son 3 post
     carousels = Carousel.objects.all()
@@ -10,7 +10,7 @@ def home(request):
         'carousels': carousels,
     })
 
-# Tüm postlar
+# --- Tüm Postlar ---
 def post_list(request):
     posts = Post.objects.filter(active=True).order_by('-created_at')
     categories = Category.objects.all()
@@ -19,7 +19,7 @@ def post_list(request):
         'categories': categories,
     })
 
-# Tekil post
+# --- Tekil Post ---
 def post_detail(request, slug):
     post = get_object_or_404(Post, slug=slug, active=True)
     categories = Category.objects.all()
@@ -28,13 +28,13 @@ def post_detail(request, slug):
         'categories': categories,
     })
 
-# Kategoriye göre filtrelenmiş postlar
+# --- Kategoriye Göre Filtrelenmiş Postlar ---
 def category_posts(request, slug):
     category = get_object_or_404(Category, slug=slug)
     posts = Post.objects.filter(category=category, active=True).order_by('-created_at')
     categories = Category.objects.all()
-    return render(request, 'blog/post_list.html', {
+    return render(request, 'blog/category_detail.html', {
         'category': category,
-        'posts': posts,
-        'categories': categories,
+        'category_posts': posts,
+        'categories': categories,  # Sidebar için
     })

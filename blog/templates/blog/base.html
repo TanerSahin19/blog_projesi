@@ -6,34 +6,46 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{% block title %}My Blog{% endblock %}</title>
+
   <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+
   <!-- Custom CSS -->
   <link rel="stylesheet" href="{% static 'blog/css/style.css' %}">
 </head>
-<body>
+<body class="bg-light">
+
   <!-- Navbar -->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-danger shadow-sm">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-danger shadow-sm sticky-top">
     <div class="container">
-      <a class="navbar-brand fw-bold text-uppercase" href="{% url 'blog:home' %}">BLOG</a>
+      <!-- Logo -->
+      <a class="navbar-brand fw-bold text-uppercase" href="{% url 'blog:home' %}">
+        <i class="bi bi-journal-text"></i> BLOG
+      </a>
+
+      <!-- Toggler -->
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
         aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
 
+      <!-- Navbar Links -->
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav me-auto">
           <li class="nav-item">
-            <a class="nav-link fw-bold text-uppercase" href="{% url 'blog:home' %}">HOME</a>
+            <a class="nav-link fw-bold text-uppercase" href="{% url 'blog:home' %}">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link fw-bold text-uppercase" href="{% url 'blog:post_list' %}">POSTS</a>
+            <a class="nav-link fw-bold text-uppercase" href="{% url 'blog:post_list' %}">Posts</a>
           </li>
 
           <!-- Categories Dropdown -->
           <li class="nav-item dropdown">
-            <a class="nav-link fw-bold text-uppercase dropdown-toggle" href="#" id="categoriesDropdown" role="button"
-               data-bs-toggle="dropdown" aria-expanded="false">
+            <a class="nav-link fw-bold text-uppercase dropdown-toggle" href="#" id="categoriesDropdown" 
+               role="button" data-bs-toggle="dropdown" aria-expanded="false">
               Categories
             </a>
             <ul class="dropdown-menu shadow rounded" aria-labelledby="categoriesDropdown">
@@ -44,24 +56,29 @@
           </li>
         </ul>
 
-        <!-- Sağ taraf: Login/Register -->
+        <!-- Right side (Login/Register) -->
         <ul class="navbar-nav ms-auto">
           <li class="nav-item me-2">
-            <a class="btn btn-outline-light fw-bold text-uppercase" href="#">Login</a>
+            <a class="btn btn-outline-light fw-bold text-uppercase px-3" href="#">Login</a>
           </li>
           <li class="nav-item">
-            <a class="btn btn-light text-danger fw-bold text-uppercase" href="#">Register</a>
+            <a class="btn btn-light text-danger fw-bold text-uppercase px-3" href="#">Register</a>
           </li>
         </ul>
       </div>
     </div>
   </nav>
 
-  <!-- İçerik -->
-  <div class="container mt-4">
+  <!-- Content -->
+  <main class="container my-5">
     {% block content %}
     {% endblock %}
-  </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-danger text-white text-center py-3 mt-5">
+    <small>&copy; {{ now|date:"Y" }} My Blog - All Rights Reserved.</small>
+  </footer>
 
   <!-- Bootstrap JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>

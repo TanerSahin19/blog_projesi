@@ -4,8 +4,8 @@ from . import views
 app_name = 'blog'
 
 urlpatterns = [
-    path('', views.home, name='home'),
-    path('posts/', views.post_list, name='post_list'),
-    path('posts/<slug:slug>/', views.post_detail, name='post_detail'),
-    path('category/<slug:slug>/', views.category_posts, name='category_posts'),  # kategori url
+    path('', views.home, name='home'),  # Ana sayfa
+    path('posts/', views.post_list, name='post_list'),  # Tüm postlar
+    path('posts/<slug:slug>/', views.post_detail, name='post_detail'),  # Tekil post
+    path('category/<slug:slug>/', views.category_posts, name='category_posts'),  # Kategoriye göre filtre
 ]
