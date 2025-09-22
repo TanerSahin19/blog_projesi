@@ -1,16 +1,16 @@
-html, body {
-  height: 100%;   /* body ve html %100 olsun */
-  margin: 0; 
-  padding:0;
+html,
+body {
+  height: 100%; /* body ve html %100 olsun */
+  margin: 0;
+  padding: 0;
   font-family: "Roboto", sans-serif;
   font-weight: 400;
   font-style: normal;
 }
 
-
 .carousel-item img {
-  height: 450px;      /* container kadar yükseklik */
-  width: 100%;       /* tam genişlik */
+  height: 450px; /* container kadar yükseklik */
+  width: 100%; /* tam genişlik */
   object-fit: cover; /* kırpılarak doldur */
 }
 
@@ -22,7 +22,6 @@ h1 {
   padding: 0;
   margin-top: 20px; /* Üstten boşluk */
   margin-bottom: 20px; /* Alttan boşluk */
-
 }
 
 /* Navbar hover efekti */
@@ -31,7 +30,7 @@ h1 {
 }
 
 .navbar-nav .nav-link::after {
-  content: '';
+  content: "";
   position: absolute;
   width: 0;
   height: 2px;
@@ -52,7 +51,6 @@ h1 {
 
 /* Hover (üzerine gelince) efekti */
 
-
 /* Dropdown item hover */
 .dropdown-menu .dropdown-item:hover {
   background-color: #dc3545;
@@ -61,22 +59,24 @@ h1 {
 }
 
 .banner {
-    position: relative;
-    background-size: cover;
-    background-position: center center;
-    width: 100%;
-    height: 450px; /* istediğin boyutu verebilirsin */
-    background-size: cover;
-    background-repeat: no-repeat;
+  position: relative;
+  width: 100%;
+  height: 450px;
+  background-size: cover;
+  background-position: center center;
 }
 
-.benner::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 450px;
-    background-color: rgba(0, 0, 0, 0.5); /* yarı saydam siyah örtü */
-    z-index: 1;
+.banner .overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1;
+}
+
+.banner .container {
+  position: relative;
+  z-index: 2;
 }
