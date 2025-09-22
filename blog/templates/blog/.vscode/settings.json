@@ -1,0 +1,11 @@
+{
+  "files.associations": {
+    "**/templates/**/*.html": "django-html"
+  },
+  "[django-html]": {
+    "editor.formatOnSave": false
+  },
+  "css.validate": false,
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode"
+}
