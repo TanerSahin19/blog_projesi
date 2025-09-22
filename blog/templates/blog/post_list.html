@@ -6,44 +6,55 @@
 
 {% block content %}
 <!-- Banner -->
-<section class="banner">
-    <div class="container">
-        <h1 class="text-uppercase fw-bold">Latest Posts</h1>
+<section class="banner" style="background-image: url('{% static 'blog/images/model-3.jpg' %}');">
+    <div class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-md-12 text-center">
+                <h1 class="text-uppercase fw-bold text-white">Latest Posts</h1>
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb justify-content-center bg-transparent">
+                        <li class="breadcrumb-item">
+                            <a href="#" class="text-center text-white text-decoration-none fw-bold h4">Home</a>
+                        </li>
+                        <li class="breadcrumb-item active text-center text-danger h4 fw-bold" aria-current="page">Library</li>
+                    </ol>
+
+                </nav>
+            </div>
+        </div>
     </div>
 </section>
-
-
 <!-- Posts -->
+
 <div class="container mt-5">
     <div class="row">
         <!-- Post List -->
         <div class="col-md-9">
 
-
             {% if posts %}
-                {% for post in posts %}
-                    <div class="card mb-4 shadow-sm">
-                        {% if post.image %}
-                            <img src="{{ post.image.url }}" class="card-img-top" alt="{{ post.title }}">
+            {% for post in posts %}
+            <div class="card mb-4 shadow-sm">
+                {% if post.image %}
+                <img src="{{ post.image.url }}" class="card-img-top" alt="{{ post.title }}">
+                {% endif %}
+                <div class="card-body">
+                    <h4 class="card-title">
+                        <a href="{{ post.get_absolute_url }}" class="text-decoration-none text-dark fw-bold">
+                            {{ post.title }}
+                        </a>
+                    </h4>
+                    <p class="card-text text-muted">{{ post.content|truncatewords:40 }}</p>
+                    <div class="d-flex justify-content-between align-items-center">
+                        {% if post.category %}
+                        <span class="badge bg-danger">Category: {{ post.category.name }}</span>
                         {% endif %}
-                        <div class="card-body">
-                            <h4 class="card-title">
-                                <a href="{{ post.get_absolute_url }}" class="text-decoration-none text-dark fw-bold">
-                                    {{ post.title }}
-                                </a>
-                            </h4>
-                            <p class="card-text text-muted">{{ post.content|truncatewords:40 }}</p>
-                            <div class="d-flex justify-content-between align-items-center">
-                                {% if post.category %}
-                                    <span class="badge bg-danger">Category: {{ post.category.name }}</span>
-                                {% endif %}
-                                <small class="text-muted">{{ post.created_at|date:"d M Y" }}</small>
-                            </div>
-                        </div>
+                        <small class="text-muted">{{ post.created_at|date:"d M Y" }}</small>
                     </div>
-                {% endfor %}
+                </div>
+            </div>
+            {% endfor %}
             {% else %}
-                <p class="text-muted">Henüz yazı eklenmemiş.</p>
+            <p class="text-muted">Henüz yazı eklenmemiş.</p>
             {% endif %}
 
         </div>
@@ -55,16 +66,16 @@
                 <ul class="list-group list-group-flush">
                     {% get_categories as categories %}
                     {% if categories %}
-                        {% for category in categories %}
-                            <li class="list-group-item d-flex justify-content-between align-items-center">
-                                <a href="{% url 'blog:category_posts' category.slug %}" class="text-decoration-none text-dark">
-                                    {{ category.name }}
-                                </a>
-                                <span class="badge bg-danger rounded-pill">{{ category.posts.count }}</span>
-                            </li>
-                        {% endfor %}
+                    {% for category in categories %}
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <a href="{% url 'blog:category_posts' category.slug %}" class="text-decoration-none text-dark">
+                            {{ category.name }}
+                        </a>
+                        <span class="badge bg-danger rounded-pill">{{ category.posts.count }}</span>
+                    </li>
+                    {% endfor %}
                     {% else %}
-                        <li class="list-group-item text-muted">Kategori bulunamadı.</li>
+                    <li class="list-group-item text-muted">Kategori bulunamadı.</li>
                     {% endif %}
                 </ul>
             </div>

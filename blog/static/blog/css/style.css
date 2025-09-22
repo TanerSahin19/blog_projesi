@@ -60,3 +60,23 @@ h1 {
   border-radius: 6px;
 }
 
+.banner {
+    position: relative;
+    background-size: cover;
+    background-position: center center;
+    width: 100%;
+    height: 450px; /* istediğin boyutu verebilirsin */
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.benner::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 450px;
+    background-color: rgba(0, 0, 0, 0.5); /* yarı saydam siyah örtü */
+    z-index: 1;
+}
